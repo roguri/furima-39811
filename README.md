@@ -26,64 +26,63 @@ Things you may want to cover:
 
 | Column------------| Type---| Options------------------|
 | ------------------| -------| -------------------------|
-| nickname          | string | null: false, unique: true|
+| nickname          | string | null: false              |
 | email             | string | null: false, unique: true|
 | encrypted_password| string | null: false              |
 | last_name         | string | null: false              |
 | first_name        | string | null: false              |
-| birth_year        | integer| null: false              |
-| birth_month       | integer| null: false              |
-| birth_date        | integer| null: false              |
+| birth_date        | date   | null: false              |
 
 ### Association
 
 - has_many :items
-- has_many :Purchases   
+- has_many :purchases   
 
 ## items テーブル
 
-| Column----------| Type------| Options------------------|
-| ----------------| ----------| -------------------------|
-| title           | string    | null: false              |
-| price           | integer   | null: false              |
-| category        | string    | null: false              |
-| condition       | text      | null: false              |
-| shipping_cost   | integer   | null: false              |
-| region_origin   | string    | null: false              |
-| item_information| text      | null: false              |
-| item_user_id    | references| null: false              |
+| Column----------| Type------| Options---------------------|
+| ----------------| ----------| ----------------------------|
+| title           | string    | null: false                 |
+| price           | integer   | null: false                 |
+| category_id     | integer   | null: false                 |
+| condition_id    | integer   | null: false                 |
+| shipping_cost_id| integer   | null: false                 |
+| shipping_date_id| integer   | null: false                 |
+| region_id       | integer   | null: false                 |
+| item_information| text      | null: false                 |
+| user            | references| null: false,foreign_key:true|
 
 ### Association
 
-- belongs_to :users
-- has_one :Purchases 
+- belongs_to :user
+- has_one :purchase 
 
 ## Purchases テーブル
 
-| Column----------| Type------| Options---------------------|
-| ----------------| ----------| ----------------------------|
-| purchase_user_id| references| null: false,foreign_key:true|
-| item_id         | references| null: false,foreign_key:true|
+| Column| Type------| Options---------------------|
+| ------| ----------| ----------------------------|
+| user  | references| null: false,foreign_key:true|
+| item  | references| null: false,foreign_key:true|
 
 ### Association
 
-- belongs_to :users
-- belongs_to :items
-- has_one :Shippings
+- belongs_to :user
+- belongs_to :item
+- has_one :shipping
 
 
 ## Shippings テーブル
 
-| Column--------| Type---| Options----|
-| --------------| -------| -----------|
-| address_number| integer| null: false|
-| prefecture    | string | null: false|
-| city          | string | null: false|
-| street_number | integer| null: false|
-| building_name | text   |            |
-| phone_number  | integer| null: false|
-| purchase_id   | integer| null: false|
+| Column--------| Type---| Options---------------------|
+| --------------| -------| ----------------------------|
+| address_number| string | null: false                 |
+| region_id     | integer| null: false                 |
+| city          | string | null: false                 |
+| street_number | string | null: false                 |
+| building_name | string |                             |
+| phone_number  | string | null: false                 |
+| purchase      | integer| null: false,foreign_key:true|
 
 ### Association
 
-- belongs_to :Purchases
+- belongs_to :purchase
