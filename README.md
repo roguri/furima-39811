@@ -31,6 +31,8 @@ Things you may want to cover:
 | encrypted_password| string | null: false              |
 | last_name         | string | null: false              |
 | first_name        | string | null: false              |
+| last_name_kana    | string | null: false              |
+| first_name_kana   | string | null: false              |
 | birth_date        | date   | null: false              |
 
 ### Association
@@ -73,15 +75,15 @@ Things you may want to cover:
 
 ## Shippings テーブル
 
-| Column--------| Type---| Options---------------------|
-| --------------| -------| ----------------------------|
-| address_number| string | null: false                 |
-| region_id     | integer| null: false                 |
-| city          | string | null: false                 |
-| street_number | string | null: false                 |
-| building_name | string |                             |
-| phone_number  | string | null: false                 |
-| purchase      | integer| null: false,foreign_key:true|
+| Column--------| Type-----| Options---------------------|
+| --------------| ---------| ----------------------------|
+| address_number| string   | null: false                 |
+| region_id     | integer  | null: false                 |
+| city          | string   | null: false                 |
+| street_number | string   | null: false                 |
+| building_name | string   |                             |
+| phone_number  | string   | null: false                 |
+| purchase      | reference| null: false,foreign_key:true|
 
 ### Association
 
