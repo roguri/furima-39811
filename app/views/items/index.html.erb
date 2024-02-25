@@ -128,7 +128,6 @@
     </div>
     <ul class='item-lists'>
       <% @items.each do |item| %>
-        <%# 商品のインスタンス変数になにか入っている場合、中身のすべてを展開できるようにしましょう %>
         <li class='list'>
           <%= link_to "#" do %>
           <div class='item-img-content'>
@@ -145,7 +144,7 @@
               <%= item.title %>
             </h3>
             <div class='item-price'>
-              <span><%= item.price %>円<br><%= '配送料負担' %></span>
+              <span><%= item.price %>円<br><%= item.shipping_cost.name %></span>
               <div class='star-btn'>
                 <%= image_tag "star.png", class:"star-icon" %>
                 <span class='star-count'>0</span>
