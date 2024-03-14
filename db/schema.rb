@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_02_23_013150) do
+ActiveRecord::Schema[7.0].define(version: 2024_03_14_075617) do
   create_table "active_storage_attachments", charset: "utf8mb4", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -54,6 +54,28 @@ ActiveRecord::Schema[7.0].define(version: 2024_02_23_013150) do
     t.index ["user_id"], name: "index_items_on_user_id"
   end
 
+  create_table "purchases", charset: "utf8", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "item_id"
+    t.bigint "user_id"
+    t.index ["item_id"], name: "index_purchases_on_item_id"
+    t.index ["user_id"], name: "index_purchases_on_user_id"
+  end
+
+  create_table "shippings", charset: "utf8", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "purchase_id"
+    t.string "postal_number", null: false
+    t.integer "region_id", null: false
+    t.string "city", null: false
+    t.string "street_number", null: false
+    t.string "building_name"
+    t.string "phone_number", null: false
+    t.index ["purchase_id"], name: "index_shippings_on_purchase_id"
+  end
+
   create_table "users", charset: "utf8mb4", force: :cascade do |t|
     t.string "nickname", null: false
     t.string "email", default: "", null: false
@@ -75,4 +97,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_02_23_013150) do
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "items", "users"
+  add_foreign_key "purchases", "items"
+  add_foreign_key "purchases", "users"
+  add_foreign_key "shippings", "purchases"
 end
