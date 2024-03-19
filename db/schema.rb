@@ -67,7 +67,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_03_14_075617) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "purchase_id"
-    t.string "postal_number", null: false
+    t.string "address_number", null: false
     t.integer "region_id", null: false
     t.string "city", null: false
     t.string "street_number", null: false
