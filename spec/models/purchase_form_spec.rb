@@ -54,10 +54,20 @@ RSpec.describe Shipping, type: :model do
         @purchase_form.valid?
         expect(@purchase_form.errors.full_messages).to include("Phone number can't be blank")
       end
-      it '電話番号が10桁以上11桁以内の半角数値でないと購入できない' do
-        @purchase_form.phone_number = '090123456789'
+      it '電話番号が9桁以下だと購入できない' do
+        @purchase_form.phone_number = '123456789'
         @purchase_form.valid?
-        expect(@purchase_form.errors.full_messages).to include("Phone number is invalid. Input only number")
+        expect(@purchase_form.errors.full_messages).to include("Phone number is invalid")
+      end
+      it '電話番号が12桁以上だと購入できない' do
+        @purchase_form.phone_number = '123456789012'
+        @purchase_form.valid?
+        expect(@purchase_form.errors.full_messages).to include("Phone number is invalid")
+      end
+      it '電話番号が英数字混合だと購入できない' do
+        @purchase_form.phone_number = '1234567890a'
+        @purchase_form.valid?
+        expect(@purchase_form.errors.full_messages).to include("Phone number is invalid")
       end
       it 'トークンがないと購入できない' do
         @purchase_form.token = ''

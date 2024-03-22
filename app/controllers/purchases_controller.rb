@@ -7,7 +7,6 @@ class PurchasesController < ApplicationController
   def index
     gon.public_key = ENV["PAYJP_PUBLIC_KEY"]
     @purchase = PurchaseForm.new
-    @item = Item.find(params[:item_id])
   end
 
   def new
@@ -15,7 +14,6 @@ class PurchasesController < ApplicationController
   end
 
   def create
-    @item = Item.find(params[:item_id])
     @purchase = PurchaseForm.new(purchase_params)
     if @purchase.valid?
       pay_item
@@ -31,8 +29,8 @@ class PurchasesController < ApplicationController
   private
 
   def purchase_params
-    params.require(:purchase_form).permit(:address_number, :region_id, :city, :street_number, :building_name, :phone_number, 
-                                          :item_id, :user_id).merge(user_id: current_user.id, item_id: params[:item_id], token: params[:token])
+    params.require(:purchase_form).permit(:address_number, :region_id, :city, :street_number, :building_name, :phone_number).merge(
+      user_id: current_user.id, item_id: params[:item_id], token: params[:token])
   end
 
   def pay_item
