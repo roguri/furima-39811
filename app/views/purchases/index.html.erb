@@ -35,6 +35,7 @@
 
     <%= form_with scope: :purchase_form, url: item_purchases_path, id: 'charge-form', class: 'transaction-form-wrap',local: true do |f| %>
     
+    <%= include_gon %>
     
     <%# カード情報の入力 %>
     <div class='credit-card-form'>
