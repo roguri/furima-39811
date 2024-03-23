@@ -1,4 +1,4 @@
-const calc = () => {
+/* const calc = () => {
   const priceInput = document.getElementById("item-price");
   priceInput.addEventListener("input", () => {
     const inputValue = priceInput.value;
@@ -10,4 +10,4 @@ const calc = () => {
 };
 
 window.addEventListener("turbo:load", calc);
-window.addEventListener("turbo:render", calc);
+window.addEventListener("turbo:render", calc); */
